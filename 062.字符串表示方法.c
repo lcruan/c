@@ -9,6 +9,14 @@ int main(void)
 	str2[0] = 'h'; // 修改字符数组某一个元素
 	
 	printf("str1：%s\n", str1);
-	printf("str2: %s\n", str2);                           
+	printf("str2: %s\n", str2);  
+	
+	// 字符指针表示字符串
+	char *p = "Hello world"; // 字符串常量 存放在只读数据区
+	p = "test";
+	p = str1;
+//	p[0] = 'L'; // 不能修改常量字符串
+	printf("p: %s\n", p);
+	                         
 	return 0;
 }
