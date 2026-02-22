@@ -12,6 +12,8 @@ int main(void)
 		char c = str[i];
 		printf("字符 %c：", c);
 		
+		
+		
 		// 依次检测字符类型并输出结果
 		if (isalpha(c)) printf("字母 | "); // 检查是否为字母
 		if (isupper(c)) printf("大写 | "); // 检查是否为大写字母
