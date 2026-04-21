@@ -43,6 +43,25 @@ int main(void)
 		
 		printf("读取内容：%s", buffer);
 	}
+	printf("\n");
+	
+	// 3. 演示ferror和clearerr：主动触发错误
+	printf("【场景3】错误状态处理：\n");
+	fclose(fp);
+	fp = fopen("demo.txt", "r"); // 只读方式打开，写不了内容的
+	if (fputc("A", fp) == EOF)  // 写入A, 这样写是会出错的 
+	{
+		if (ferror(fp))
+		{
+			perror("写入错误");
+			printf("ferror检测到I/O错误\n");
+		}
+	}
+	
+	clearerr(fp);
+	printf("clearerr后错误状态：error=%d, eof=%d\n", ferror(fp), feof(fp));
+	
+	
 	
 	fclose(fp);
 	
