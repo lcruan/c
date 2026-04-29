@@ -21,10 +21,44 @@ typedef struct
 	
 } StudentList;
 
+// 查找学生索引
+int find_student_index(StudentList *student_list, char *student_id)
+{
+	for(int i = 0; i < student_list->total_students; i++)
+	{
+		if (strcmp(student_list->student[i]->student_id, student_id) == 0)
+			return i;
+	}
+	return -1;
+}
+
+// 添加学生
+void add_student(StudentList *student_list)
+{
+	// 判断列表是否已满
+	if (student_list->total_students >= MAX_STUDENTS)
+	{
+		printf("学生列表已满，无法添加更多学生\n");
+		return;
+	}
+	
+	Student new_student = {0};
+	char input_id[MAX_STRING_LENGTH];
+	
+	// 学号唯一验证
+	while(1)
+	{
+		printf("请输入学生的学号");
+		scanf("%s", &input_id);
+		
+		// 验证学生是否存在
+	}
+}
 
 int main(void)
 {
 	char user_choice;
+	StudentList student_list = {0};
 	
 	while(1)
 	{
