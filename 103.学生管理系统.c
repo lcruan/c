@@ -110,6 +110,29 @@ void delete_student(StudentList *student_list)
 	}
 }
 
+// 显示所有学生
+void display_all_student(StudentList *student_list)
+{
+	if (student_list->total_students == 0)
+	{
+		printf("当前无学生信息，请添加后再查询\n");
+		return;
+	}
+	
+	printf("学号\t姓名\t年龄\t专业\t成绩\n");
+	
+	for (int i = 0; i < student_list->total_students; i++)
+	{
+		Student *current_student = &student_list->student[i];  // current_student是结构体指针，访问成员用->
+		printf("%s\t%s\t%d\t%s\t%.2f\n", current_student->student_id,
+			current_student->student_name,
+			current_student->student_age,
+			current_student->student_major,
+			current_student->student_score
+		);
+	}
+}
+
 int main(void)
 {
 	char user_choice;
@@ -137,7 +160,7 @@ int main(void)
 		}
 		else if (user_choice == '3')
 		{
-			printf("用户选择了3\n");
+			display_all_student(&student_list);
 		}
 		else if (user_choice == '4')
 		{
