@@ -133,6 +133,39 @@ void display_all_student(StudentList *student_list)
 	}
 }
 
+// 修改学生
+void update_student(StudentList *student_list)
+{
+	char input_id[MAX_STRING_LENGTH];
+	printf("请输入要修改学生的学号：");
+	scanf("%s", input_id);
+	int student_index = find_student_index(student_list, input_id);
+	if (student_index == -1)
+	{
+		printf("要修改的学号%s不存在，请重新输入\n", input_id);
+		return;
+	}
+	
+	Student *current_student = &student_list->student[student_index];
+	printf("请输入要修改的学生的姓名：\n");
+	scanf("%s", current_student->student_name); // 数组可以不用加取地址
+	
+	printf("请输入要修改的学生的年龄：\n");
+	scanf("%d", &current_student->student_age);
+	
+	printf("请输入要修改的学生的专业：\n");
+	scanf("%s", current_student->student_major);
+	
+	printf("请输入要修改的学生的成绩\n");
+	scanf("%f", &current_student->student_score);
+	
+	printf("学生信息修改成功\n");
+	
+	
+	
+	
+}
+
 int main(void)
 {
 	char user_choice;
@@ -164,7 +197,7 @@ int main(void)
 		}
 		else if (user_choice == '4')
 		{
-			printf("用户选择了4\n");
+			update_student(&student_list);
 		}
 		else if (user_choice == '5')
 		{
