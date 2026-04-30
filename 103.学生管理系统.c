@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #define MAX_STRING_LENGTH 50
 #define MAX_STUDENTS 100
@@ -26,10 +27,16 @@ int find_student_index(StudentList *student_list, char *student_id)
 {
 	for(int i = 0; i < student_list->total_students; i++)
 	{
-		if (strcmp(student_list->student[i]->student_id, student_id) == 0)
+		if (strcmp(student_list->student[i].student_id, student_id) == 0)
 			return i;
 	}
 	return -1;
+}
+
+// 判断学生是否存在
+int is_student_exist(StudentList *student_list, char *student_id)
+{
+	return find_student_index(student_list, student_id) >= 0;
 }
 
 // 添加学生
@@ -48,11 +55,37 @@ void add_student(StudentList *student_list)
 	// 学号唯一验证
 	while(1)
 	{
-		printf("请输入学生的学号");
+		printf("请输入学生的学号：");
 		scanf("%s", &input_id);
 		
 		// 验证学生是否存在
+		if(is_student_exist(student_list, input_id))
+		{
+			printf("学号已存在，请重新输入\n");
+		}
+		else
+		{
+			strcpy(new_student.student_id, input_id);
+			break;
+		}
 	}
+	
+	printf("请输入学生的姓名：\n");
+	scanf("%s", new_student.student_name); // 数组可以不用加取地址
+	
+	printf("请输入学生的年龄：\n");
+	scanf("%d", &new_student.student_age);
+	
+	printf("请输入学生的专业：\n");
+	scanf("%s", new_student.student_major);
+	
+	printf("请输入学生的成绩\n");
+	scanf("%f", &new_student.student_score);
+	
+	// 把新的数据 加到最后一个
+	student_list->student[student_list->total_students] = new_student;
+	student_list->total_students++;
+	printf("学生信息添加成功\n");
 }
 
 int main(void)
@@ -74,7 +107,7 @@ int main(void)
 		
 		if (user_choice == '1')
 		{
-			printf("用户选择了1\n");
+			add_student(&student_list);
 		}
 		else if (user_choice == '2')
 		{
