@@ -88,6 +88,28 @@ void add_student(StudentList *student_list)
 	printf("学生信息添加成功\n");
 }
 
+// 删除学生
+void delete_student(StudentList *student_list)
+{
+	char input_id[MAX_STRING_LENGTH];
+	printf("请输入要删除的学号：");
+	scanf("%s", input_id); // 数组不用加取地址
+	int student_index = find_student_index(student_list, input_id);
+	if (student_index >= 0) // 找到要删除的学生
+	{
+		for (int i = student_index; i < student_list->total_students - 1; i++)
+		{
+			student_list->student[i] = student_list->student[i + 1];
+		}
+		student_list->total_students--;
+		printf("学号：%s的学生删除成功\n", input_id);
+	}
+	else // 未找到要删除的学生
+	{
+		printf("学号不存在，删除失败\n");
+	}
+}
+
 int main(void)
 {
 	char user_choice;
@@ -111,7 +133,7 @@ int main(void)
 		}
 		else if (user_choice == '2')
 		{
-			printf("用户选择了2\n");
+			delete_student(&student_list);
 		}
 		else if (user_choice == '3')
 		{
