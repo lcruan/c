@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "snake.h"
 
 // 隐藏光标
