@@ -70,11 +70,42 @@ void InitInterface()
 	printf("↑ ↓ ← →：移动蛇\n");
 	printf("空格键：暂停游戏\n");
 }
+
 // 初始化蛇
+void InitSnake()
+{
+	// 蛇头
+	snake.len = 3; // 蛇头的长度初始化为3
+	snake.headX = COL/2;  // 蛇头初始化横坐标
+	snake.headY = ROW/2;
+	
+	// 蛇身
+	body[0].bodyX = COL/2 - 1; // 第一节蛇身
+	body[0].bodyY = ROW/2;
+	body[1].bodyX = COL/2 - 2; // 第二节蛇身
+	body[1].bodyY = ROW/2;
+	
+	map[snake.headY][snake.headX] = HEAD; // 在游戏区域标记蛇头
+	map[body[0].bodyY][body[0].bodyX] = BODY; // 在游戏区域标记第一节蛇身
+	map[body[1].bodyY][body[1].bodyX] = BODY; // 在游戏区域标记第二节蛇身
+}
 
 // 随机生成食物
 
 // 打印蛇
+void DrawSnake()
+{
+	CursorJump(2 * snake.headX, snake.headY); // 注意乘以2，因为■占用2个字符
+	SetColor(COLOR_LIGHT_BLUE); // 设置蛇头颜色为淡蓝色
+	printf("■");
+	SetColor(COLOR_BLUE); // 设置蛇身颜色为蓝色
+	for(int i = 0; i < snake.len  - 1; i++)
+	{
+		CursorJump(2 * body[i].bodyX, body[i].bodyY);
+		printf("■");
+	}
+	SetColor(COLOR_DEFAULT);
+}
 
 // 移动蛇
 
@@ -84,6 +115,8 @@ int main(void)
 {
 	HideCursor();
 	InitInterface();
-	
+	InitSnake();
+	DrawSnake();
+	while(1);
 	return 0;
 }
