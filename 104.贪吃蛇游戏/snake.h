@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <Windows.h>
 #include <conio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define ROW 22             // 游戏区行数
 #define COL 32             // 游戏区列数

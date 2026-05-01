@@ -91,6 +91,21 @@ void InitSnake()
 }
 
 // 随机生成食物
+void RandFood()
+{
+	int x, y;
+	do
+	{
+		x = rand() % (COL - 2) + 1; // 列范围1~COL-2
+		y = rand() % (ROW -2 ) + 1;	// 行的范围1~ROW -2
+	} while(map[y][x] != EMPTY); // 如果不为空就重新生成
+	
+	map[y][x] = FOOD; // 标记食物
+	CursorJump(2 * x, y);
+	SetColor(COLOR_RED); // 设置食物为红色
+	printf("■");
+	SetColor(COLOR_DEFAULT);
+}
 
 // 打印蛇
 void DrawSnake()
@@ -117,6 +132,8 @@ int main(void)
 	InitInterface();
 	InitSnake();
 	DrawSnake();
+	srand(time(NULL)); // 设置随机数种子
+	RandFood();
 	while(1);
 	return 0;
 }
