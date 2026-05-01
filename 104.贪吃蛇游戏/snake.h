@@ -5,6 +5,9 @@
 #include <Windows.h>
 #include <conio.h>
 
+#define ROW 22             // 游戏区行数
+#define COL 32             // 游戏区列数
+
 // 颜色枚举
 enum
 {
